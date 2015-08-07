@@ -2,7 +2,7 @@ package org.kurron.event.source
 /**
  * Base aggregate of a logically grouped stream of events.
  */
-class Aggregate {
+abstract class Aggregate {
 
     /**
      * Unique identifier of this instance.

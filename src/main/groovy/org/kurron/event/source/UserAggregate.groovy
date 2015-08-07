@@ -1,12 +1,10 @@
 package org.kurron.event.source
-
-import groovy.transform.Immutable
-
 /**
  * A user in the system at a particular point in time.
  */
-@Immutable
 class UserAggregate extends Aggregate {
+
+    UUID userID
 
     String firstName
 
@@ -15,4 +13,6 @@ class UserAggregate extends Aggregate {
     String email
 
     String phone
+
+    boolean markAsDeleted
 }

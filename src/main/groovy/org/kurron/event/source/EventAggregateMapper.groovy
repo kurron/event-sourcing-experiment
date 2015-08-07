@@ -5,19 +5,43 @@ package org.kurron.event.source
  */
 class EventAggregateMapper {
 
+    private final List<? extends Event> seen = []
+    private final List<UserAggregate> userAggregates = []
+
     UserAggregate processEvent( UserCreateEvent event ) {
-        // add the event to the list of seen events
-        // order the list
-        // run through the events and generate the aggregate
+        assert seen.add( event )
+        new UserAggregate( id: UUID.randomUUID(),
+                           sequence: userAggregates.size(),
+                           type: 'user-aggregate',
+                           asOf: event.asOf,
+                           userID: event.userID,
+                           firstName: event.firstName ,
+                           lastName: event.lastName,
+                           email: event.email,
+                           phone: event.phone,
+                           markAsDeleted: false )
     }
     UserAggregate processEvent( UserUpdateEvent event ) {
-        // add the event to the list of seen events
-        // order the list
-        // run through the events and generate the aggregate
+        assert seen.add( event )
+        new UserAggregate( id: UUID.randomUUID(),
+                           sequence: userAggregates.size(),
+                           type: 'user-aggregate',
+                           asOf: event.asOf,
+                           userID: event.userID,
+                           firstName: event.firstName ,
+                           lastName: event.lastName,
+                           email: event.email,
+                           phone: event.phone,
+                           markAsDeleted: false )
     }
+
     UserAggregate processEvent( UserDeleteEvent event ) {
-        // add the event to the list of seen events
-        // order the list
-        // run through the events and generate the aggregate
+        assert seen.add( event )
+        new UserAggregate( id: UUID.randomUUID(),
+                sequence: userAggregates.size(),
+                type: 'user-aggregate',
+                asOf: event.asOf,
+                userID: event.userID,
+                markAsDeleted: true )
     }
 }
