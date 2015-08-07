@@ -1,12 +1,7 @@
 package org.kurron.event.source
-
-import groovy.transform.Immutable
-import java.time.LocalDateTime
-
 /**
  * Base aggregate of a logically grouped stream of events.
  */
-@Immutable
 class Aggregate {
 
     /**
@@ -25,8 +20,8 @@ class Aggregate {
     String type
 
     /**
-     * The time this event is effective of.
+     * The ISO-8601 timestamp this aggregate is effective of.
      */
-    LocalDateTime asOf
+    String asOf
 
 }

@@ -1,7 +1,6 @@
 package org.kurron.event.source
 
 import groovy.transform.Immutable
-import java.time.LocalDateTime
 
 /**
  * A base for snapshots in time of a particular aggregate.
@@ -20,7 +19,7 @@ class Snapshot {
     int sequence
 
     /**
-     * The time this snapshot encapsulates up to.
+     * The ISO-8601 timestamp this snapshot encapsulates up to.
      */
-    LocalDateTime asOf
+    String asOf
 }
