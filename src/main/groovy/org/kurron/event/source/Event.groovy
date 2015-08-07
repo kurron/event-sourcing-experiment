@@ -12,6 +12,7 @@ abstract class Event {
     /**
      * The order that event occurred in the stream.  0 is the first event and Integer.MAX is the most recent event.
      */
+    //TODO: are sequences unique through the whole stream or a sub-set, such as per event type?  Hard in a distributed system.
     int sequence
 
     /**

@@ -6,11 +6,13 @@ package org.kurron.event.source
 class EventAggregateMapper {
 
     private final List<? extends Event> seen = []
+
+    // do we really need to save them all or create them on demand?
     private final List<UserAggregate> userAggregates = []
 
     UserAggregate processEvent( UserCreateEvent event ) {
         assert seen.add( event )
-        new UserAggregate( id: UUID.randomUUID(),
+        def aggregate = new UserAggregate( id: UUID.randomUUID(),
                            sequence: userAggregates.size(),
                            type: 'user-aggregate',
                            asOf: event.asOf,
@@ -20,10 +22,12 @@ class EventAggregateMapper {
                            email: event.email,
                            phone: event.phone,
                            markAsDeleted: false )
+        userAggregates << aggregate
+        aggregate
     }
     UserAggregate processEvent( UserUpdateEvent event ) {
         assert seen.add( event )
-        new UserAggregate( id: UUID.randomUUID(),
+        def aggregate = new UserAggregate( id: UUID.randomUUID(),
                            sequence: userAggregates.size(),
                            type: 'user-aggregate',
                            asOf: event.asOf,
@@ -33,15 +37,19 @@ class EventAggregateMapper {
                            email: event.email,
                            phone: event.phone,
                            markAsDeleted: false )
+        userAggregates << aggregate
+        aggregate
     }
 
     UserAggregate processEvent( UserDeleteEvent event ) {
         assert seen.add( event )
-        new UserAggregate( id: UUID.randomUUID(),
+        def aggregate = new UserAggregate( id: UUID.randomUUID(),
                 sequence: userAggregates.size(),
                 type: 'user-aggregate',
                 asOf: event.asOf,
                 userID: event.userID,
                 markAsDeleted: true )
+        userAggregates << aggregate
+        aggregate
     }
 }
